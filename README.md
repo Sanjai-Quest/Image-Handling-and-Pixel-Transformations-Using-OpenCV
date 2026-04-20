@@ -45,70 +45,94 @@ Split the image (boy.jpg) into B, G, R components and display the channels
 
 #### 1. Read the image ('Eagle_in_Flight.jpg') using OpenCV imread() as a grayscale image.
 ```python
-# YOUR CODE HERE
+img = cv2.imread('Eagle_in_Flight.jpg', 0)
 ```
 
 #### 2. Print the image width, height & Channel.
 ```python
-# YOUR CODE HERE
+print("Height:", img.shape[0])
+print("Width:", img.shape[1])
+print("Channels:", 1)
 ```
 
 #### 3. Display the image using matplotlib imshow().
 ```python
-# YOUR CODE HERE
+plt.imshow(img, cmap='gray')
+plt.title("Grayscale Image")
+plt.axis('off')
+plt.show()
 ```
 
 #### 4. Save the image as a PNG file using OpenCV imwrite().
 ```python
-# YOUR CODE HERE
+cv2.imwrite('eagle.png', img)
 ```
 
 #### 5. Read the saved image above as a color image using cv2.cvtColor().
 ```python
-# YOUR CODE HERE
+img_color = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
 ```
 
 #### 6. Display the Colour image using matplotlib imshow() & Print the image width, height & channel.
 ```python
-# YOUR CODE HERE
+plt.imshow(cv2.cvtColor(img_color, cv2.COLOR_BGR2RGB))
+plt.title("Color Image")
+plt.axis('off')
+plt.show()
+
+print(img_color.shape)
 ```
 
 #### 7. Crop the image to extract any specific (Eagle alone) object from the image.
 ```python
-# YOUR CODE HERE
+crop = img_color[100:400, 200:500]
+plt.imshow(cv2.cvtColor(crop, cv2.COLOR_BGR2RGB))
+plt.show()
 ```
 
 #### 8. Resize the image up by a factor of 2x.
 ```python
-# YOUR CODE HERE
+resized = cv2.resize(crop, None, fx=2, fy=2)
+plt.imshow(cv2.cvtColor(resized, cv2.COLOR_BGR2RGB))
+plt.show()
 ```
 
 #### 9. Flip the cropped/resized image horizontally.
 ```python
-# YOUR CODE HERE
+flipped = cv2.flip(resized, 1)
+plt.imshow(cv2.cvtColor(flipped, cv2.COLOR_BGR2RGB))
+plt.show()
 ```
 
 #### 10. Read in the image ('Apollo-11-launch.jpg').
 ```python
-# YOUR CODE HERE
+apollo = cv2.imread('Apollo-11-launch.jpg')
 ```
 
 #### 11. Add the following text to the dark area at the bottom of the image (centered on the image):
 ```python
 text = 'Apollo 11 Saturn V Launch, July 16, 1969'
 font_face = cv2.FONT_HERSHEY_PLAIN
-# YOUR CODE HERE: use putText()
+cv2.putText(apollo, 
+            'Apollo 11 Saturn V Launch, July 16, 1969',
+            (50, 500),
+            cv2.FONT_HERSHEY_PLAIN,
+            2,
+            (255, 255, 255),
+            2)
 ```
 
 #### 12. Draw a magenta rectangle that encompasses the launch tower and the rocket.
 ```python
 rect_color = magenta
-# YOUR CODE HERE
+cv2.rectangle(apollo, (200, 100), (400, 600), (255, 0, 255), 3)
 ```
 
 #### 13. Display the final annotated image.
 ```python
-# YOUR CODE HERE
+plt.imshow(cv2.cvtColor(apollo, cv2.COLOR_BGR2RGB))
+plt.axis('off')
+plt.show()
 ```
 
 #### 14. Read the image ('Boy.jpg').
