@@ -137,60 +137,163 @@ plt.show()
 
 #### 14. Read the image ('Boy.jpg').
 ```python
-# YOUR CODE HERE
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread('Boy.jpg')
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 ```
 
 #### 15. Adjust the brightness of the image.
 ```python
-# Create a matrix of ones (with data type float64)
-# matrix_ones = 
-# YOUR CODE HERE
+matrix = np.ones(img.shape, dtype="uint8") * 50
 ```
 
 #### 16. Create brighter and darker images.
 ```python
 img_brighter = cv2.add(img, matrix)
 img_darker = cv2.subtract(img, matrix)
-# YOUR CODE HERE
 ```
 
 #### 17. Display the images (Original Image, Darker Image, Brighter Image).
 ```python
-# YOUR CODE HERE
+plt.figure(figsize=(10,5))
+
+plt.subplot(1,3,1)
+plt.imshow(img)
+plt.title("Original")
+plt.axis('off')
+
+plt.subplot(1,3,2)
+plt.imshow(img_darker)
+plt.title("Darker")
+plt.axis('off')
+
+plt.subplot(1,3,3)
+plt.imshow(img_brighter)
+plt.title("Brighter")
+plt.axis('off')
+
+plt.show()
 ```
 
 #### 18. Modify the image contrast.
 ```python
-# Create two higher contrast images using the 'scale' option with factors of 1.1 and 1.2 (without overflow fix)
-matrix1 = 
-matrix2 = 
-# img_higher1 = 
-# img_higher2 = 
-# YOUR CODE HERE
+img_higher1 = cv2.convertScaleAbs(img, alpha=1.1, beta=0)
+img_higher2 = cv2.convertScaleAbs(img, alpha=1.2, beta=0)
+img_lower = cv2.convertScaleAbs(img, alpha=0.8, beta=0)
 ```
 
 #### 19. Display the images (Original, Lower Contrast, Higher Contrast).
 ```python
-# YOUR CODE HERE
+plt.figure(figsize=(10,5))
+
+plt.subplot(1,4,1)
+plt.imshow(img)
+plt.title("Original")
+plt.axis('off')
+
+plt.subplot(1,4,2)
+plt.imshow(img_lower)
+plt.title("Lower Contrast")
+plt.axis('off')
+
+plt.subplot(1,4,3)
+plt.imshow(img_higher1)
+plt.title("Higher 1.1")
+plt.axis('off')
+
+plt.subplot(1,4,4)
+plt.imshow(img_higher2)
+plt.title("Higher 1.2")
+plt.axis('off')
+
+plt.show()
 ```
 
 #### 20. Split the image (boy.jpg) into the B,G,R components & Display the channels.
 ```python
-# YOUR CODE HERE
+img_bgr = cv2.imread('Boy.jpg')
+
+b, g, r = cv2.split(img_bgr)
+
+plt.figure(figsize=(10,5))
+
+plt.subplot(1,3,1)
+plt.imshow(b, cmap='gray')
+plt.title("Blue")
+
+plt.subplot(1,3,2)
+plt.imshow(g, cmap='gray')
+plt.title("Green")
+
+plt.subplot(1,3,3)
+plt.imshow(r, cmap='gray')
+plt.title("Red")
+
+plt.show()
 ```
 
 #### 21. Merged the R, G, B , displays along with the original image
 ```python
-# YOUR CODE HERE
+merged_bgr = cv2.merge((b, g, r))
+merged_rgb = cv2.cvtColor(merged_bgr, cv2.COLOR_BGR2RGB)
+
+plt.figure(figsize=(8,4))
+
+plt.subplot(1,2,1)
+plt.imshow(img)
+plt.title("Original")
+plt.axis('off')
+
+plt.subplot(1,2,2)
+plt.imshow(merged_rgb)
+plt.title("Merged")
+plt.axis('off')
+
+plt.show()
 ```
 
 #### 22. Split the image into the H, S, V components & Display the channels.
 ```python
-# YOUR CODE HERE
+hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
+h, s, v = cv2.split(hsv)
+
+plt.figure(figsize=(10,5))
+
+plt.subplot(1,3,1)
+plt.imshow(h, cmap='gray')
+plt.title("Hue")
+
+plt.subplot(1,3,2)
+plt.imshow(s, cmap='gray')
+plt.title("Saturation")
+
+plt.subplot(1,3,3)
+plt.imshow(v, cmap='gray')
+plt.title("Value")
+
+plt.show()
 ```
 #### 23. Merged the H, S, V, displays along with original image.
 ```python
-# YOUR CODE HERE
+merged_hsv = cv2.merge((h, s, v))
+rgb_from_hsv = cv2.cvtColor(merged_hsv, cv2.COLOR_HSV2RGB)
+
+plt.figure(figsize=(8,4))
+
+plt.subplot(1,2,1)
+plt.imshow(img)
+plt.title("Original")
+plt.axis('off')
+
+plt.subplot(1,2,2)
+plt.imshow(rgb_from_hsv)
+plt.title("HSV Merged")
+plt.axis('off')
+
+plt.show()
 ```
 
 ## Output:
